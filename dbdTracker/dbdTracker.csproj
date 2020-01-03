@@ -79,6 +79,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="gameLogic\Survivor.cs" />
     <Compile Include="data\userData.cs" />
+    <Compile Include="util\util.cs" />
     <EmbeddedResource Include="screens\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

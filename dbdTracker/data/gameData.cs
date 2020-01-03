@@ -11,6 +11,9 @@ namespace dbdTracker.data
         public static Killer killer;
         public static Survivor[] survivors = new Survivor[4];
 
+        public static bool SWF;
+        public static bool fullSWF;
+
         public static int killerBloodpointsEarned = 0;
         public static string slasherCharacter = "";
 
@@ -22,6 +25,7 @@ namespace dbdTracker.data
         public static spaceTimeArray[] protectionHits = { new spaceTimeArray(), new spaceTimeArray(), new spaceTimeArray(), new spaceTimeArray() };
 
         public static spaceTimeArray[] timeOnGen = { new spaceTimeArray(), new spaceTimeArray(), new spaceTimeArray(), new spaceTimeArray() };
+        public static spaceTimeArray[] timeOnGenCoop = { new spaceTimeArray(), new spaceTimeArray(), new spaceTimeArray(), new spaceTimeArray() };
         public static spaceTimeArray[] skillCheckMissed = { new spaceTimeArray(), new spaceTimeArray(), new spaceTimeArray(), new spaceTimeArray() };
         public static spaceTimeArray[] skillCheckGood = { new spaceTimeArray(), new spaceTimeArray(), new spaceTimeArray(), new spaceTimeArray() };
         public static spaceTimeArray[] skillCheckGreat = { new spaceTimeArray(), new spaceTimeArray(), new spaceTimeArray(), new spaceTimeArray() };
