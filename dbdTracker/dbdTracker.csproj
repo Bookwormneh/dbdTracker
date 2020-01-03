@@ -53,6 +53,7 @@
     <Compile Include="data\dataHandler.cs" />
     <Compile Include="data\gameData.cs" />
     <Compile Include="data\spaceTimeArray.cs" />
+    <Compile Include="parsers\playerAcheivementParser.cs" />
     <Compile Include="screens\Form1.cs">
       <SubType>Form</SubType>
     </Compile>

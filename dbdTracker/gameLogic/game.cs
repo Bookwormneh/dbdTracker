@@ -132,6 +132,11 @@ namespace dbdTracker
                 }
                 Console.WriteLine(s);
             }
+
+            if (s.Contains("Hag Hit"))
+            {
+
+            }
         }
 
         public static string getUserFromId(string id)
