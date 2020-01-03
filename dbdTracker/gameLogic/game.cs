@@ -76,12 +76,12 @@ namespace dbdTracker
                 if (s.Contains("InteractionHandler: Verbose:") && s.Contains("[AddInteraction]"))
                 {
                     // Console.WriteLine(s);
-                    string name = s.Substring(s.IndexOf("-", s.IndexOf("Verbose:")) + 2, s.IndexOf("]", s.IndexOf("Verbose:")) - s.IndexOf("-", s.IndexOf("Verbose:")) - 2);
+                    string name = util.util.substring(s, " - ", "Verbose:", "][");
                     name = name.ToLower();
                     
                     if (name.Contains(killer.playerName) && !killer.modelsAdded)
                     {
-                        killer.modelName = s.Substring(s.IndexOf("Verbose:") + "Verbose:".Length + 2, s.IndexOf("-", s.IndexOf("Verbose:")) - s.IndexOf("Verbose:") - "Verbose:".Length - 3);
+                        killer.modelName = util.util.substring(s, "Verbose: [", " -");
                         // killer.playerName = s.Substring(s.IndexOf("-", s.IndexOf("Verbose:")) + 2, s.IndexOf("]", s.IndexOf("Verbose:")) - s.IndexOf("-", s.IndexOf("Verbose:")) - 2);
 
                         Console.WriteLine("Added names: >" + killer.modelName + "|" + killer.playerName + "<");
@@ -95,7 +95,7 @@ namespace dbdTracker
                     {
                         if (name.Contains(survivors[i].playerName) && !survivors[i].modelsAdded)
                         {
-                            survivors[i].modelName = s.Substring(s.IndexOf("Verbose:") + "Verbose:".Length + 2, s.IndexOf("-", s.IndexOf("Verbose:")) - s.IndexOf("Verbose:") - "Verbose:".Length - 3);
+                            survivors[i].modelName = util.util.substring(s, "Verbose: [", " -");
                             // survivors[i].playerName = s.Substring(s.IndexOf("-", s.IndexOf("Verbose:")) + 2, s.IndexOf("]", s.IndexOf("Verbose:")) - s.IndexOf("-", s.IndexOf("Verbose:")) - 2);
 
                             Console.WriteLine("Added names: >" + survivors[i].modelName + "|" + survivors[i].playerName + "<");
@@ -115,8 +115,8 @@ namespace dbdTracker
         {
             if (s.Contains("LogAchievement"))
             {
-                string instigator = s.Substring(s.IndexOf("Instigator: ") + "Instigator: ".Length, s.IndexOf("Target: ", s.IndexOf("Instigator: ") + "Instigator: ".Length + 1) - s.IndexOf("Instigator: ") - "Instigator: ".Length - 1);
-                // Console.WriteLine(instigator);
+                string instigator = util.util.substring(s, "Instigator: ", " Target: ");
+                Console.WriteLine(instigator);
                 if (instigator.Contains(killer.modelName))
                 {
                     killer.logAchievements.Add(s);
@@ -155,8 +155,7 @@ namespace dbdTracker
             }
             // hold = hold.Substring(hold.IndexOf("id") + "id".Length + 1, hold.IndexOf("/", hold.IndexOf("id") + "id".Length + 1) - hold.IndexOf("id") - "id".Length - 1);
             // Console.WriteLine(">" + hold + "<");
-            hold = hold.Substring(hold.IndexOf("<title>Steam Community :: ") + "<title>Steam Community :: ".Length, hold.IndexOf("</title>", hold.IndexOf("<title>Steam Community :: ") + "<title>Steam Community :: ".Length) - hold.IndexOf("<title>Steam Community :: ") - "<title>Steam Community :: ".Length);
-
+            hold = util.util.substring(hold, "<title>Steam Community :: ", "</title>");
 
             Console.WriteLine(">" + hold + "<");
 
