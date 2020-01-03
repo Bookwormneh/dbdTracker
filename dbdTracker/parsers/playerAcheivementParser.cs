@@ -11,6 +11,7 @@ namespace dbdTracker.parsers
     {
         public static void parse(gameData data, string s)
         {
+            
             parseSurvivor(data, s);
             parseKiller(data, s);
         }
@@ -72,7 +73,18 @@ namespace dbdTracker.parsers
 
         public static void parseHag(gameData data, string s)
         {
-
+            if (s.Contains("[PlacePhantomTrap]") && s.Contains("[==> Interaction Enter]"))
+            {
+                Console.WriteLine("Started to place trap: " + util.util.getTime(s));
+                data.hagTrapsPlaced.startEvent(util.util.getTime(s));
+                return;
+            }
+            if (s.Contains("[PlacePhantomTrap]") && s.Contains("[<== Interaction Exit]"))
+            {
+                Console.WriteLine("End to place trap: " + util.util.getTime(s));
+                data.hagTrapsPlaced.endEvent(util.util.getTime(s));
+                return;
+            }
         }
 
         public static void parseDoctor(gameData data, string s)

@@ -51,6 +51,7 @@ namespace dbdTracker
             {
                 Console.WriteLine("Adding new killer: " + dbdID + "|" + steamID);
                 killer = new Killer(dbdID, steamID, getUserFromId(steamID));
+                gameData.slasherCharacter = "hag";
 
                 if ((killer.dataIndex = dataHandler.findData(killer.steamID)) == -1)
                 {
