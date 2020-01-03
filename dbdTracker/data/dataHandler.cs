@@ -10,8 +10,8 @@ namespace dbdTracker
 {
     class dataHandler
     {
-        static string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\dbdTrackerData\\";
-        static string dataPath = folderPath + "dbdTrackerData.json";
+        static readonly string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\dbdTrackerData\\";
+        static readonly string dataPath = folderPath + "dbdTrackerData.json";
 
         public static List<userData> data;
 
