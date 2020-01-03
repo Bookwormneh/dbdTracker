@@ -8,11 +8,33 @@ namespace dbdTracker.data
 {
     class spaceTimeArray
     {
-        public List<int[]> time;
+        private List<int[]> timeLine;
+        private int indexOfCurrentEvent = -1;
 
         public spaceTimeArray()
         {
-            time = new List<int[]>();
+            timeLine = new List<int[]>();
+        }
+
+        public void addEvent(int eventTime)
+        {
+            timeLine.Add(new int[]{ eventTime });
+        }
+
+        public void startEvent(int eventTime)
+        {
+            timeLine.Add(new int[] { eventTime , -1});
+            indexOfCurrentEvent = timeLine.Count - 1;
+        }
+
+        public void endEvent(int eventTime)
+        {
+            timeLine[indexOfCurrentEvent][1] = eventTime;
+        }
+
+        public int getTotalEvents()
+        {
+            return timeLine.Count;
         }
     }
 }
