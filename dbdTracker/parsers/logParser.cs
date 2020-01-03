@@ -210,6 +210,11 @@ namespace dbdTracker
             return currentGame;
         }
 
+        public static string parseTime(string s)
+        {
+            return "";
+        }
+
 
     }
 }
