@@ -148,7 +148,9 @@ namespace dbdTracker
 
             dataHandler.getData();
 
-            var fs = new FileStream(@"C:\Users\Noah\AppData\Local\DeadByDaylight\Saved\Logs\DeadByDaylight.log", FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+        // var fs = new FileStream(@"C:\Users\Noah\AppData\Local\DeadByDaylight\Saved\Logs\DeadByDaylight.log", FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+        
+            var fs = new FileStream(@"C:\Users\Noah\source\repos\dbdTracker\dbdTracker\DeadByDaylightOriginOneGame.log", FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using (StreamReader sr = new StreamReader(fs))
             {
                 string s = String.Empty;
@@ -170,12 +172,12 @@ namespace dbdTracker
                             // Console.WriteLine("Found player ID");
                             if (currentGame.killer == null)
                             {
-                                currentGame.addKiller(s.Substring(s.IndexOf("PlayerId:"), s.IndexOf("|") - s.IndexOf("PlayerId:")), s.Substring(s.IndexOf("|") + 1));
+                                currentGame.addKiller(util.util.substring(s, "PlayerId:", "|"), s.Substring(s.IndexOf("|") + 1)); ;
                                 
                             }
                             else
                             {
-                                currentGame.addSurvivor(s.Substring(s.IndexOf("PlayerId:"), s.IndexOf("|") - s.IndexOf("PlayerId:")), s.Substring(s.IndexOf("|") + 1));
+                                currentGame.addSurvivor(util.util.substring(s, "PlayerId:", "|"), s.Substring(s.IndexOf("|") + 1));
                                 
                             }
                         }
