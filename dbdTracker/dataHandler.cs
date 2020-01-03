@@ -13,7 +13,9 @@ namespace dbdTracker
         static string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\dbdTrackerData\\";
         static string dataPath = folderPath + "dbdTrackerData.json";
 
-        public static userData getData(string id)
+        public static List<userData> data;
+
+        public static void getData()
         {
             if (!Directory.Exists(folderPath))
             {
@@ -25,30 +27,23 @@ namespace dbdTracker
                 
             }
 
-            List<userData> items;
+            if (data == null)
+            {
+                data = new List<userData>();
+                return;
+            }
+
+            //List<userData> items;
             using (StreamReader r = new StreamReader(dataPath))
             {
                 string json = r.ReadToEnd();
-                items = JsonConvert.DeserializeObject<List<userData>>(json);
+                data = JsonConvert.DeserializeObject<List<userData>>(json);
             }
             
-            if (items == null)
-            {
-                return new userData();
-            }
-
-            for (int i = 0; i < items.Count; i++)
-            {
-                if (items[i].steamID == id)
-                {
-                    return items[i];
-                }
-            }
-
-            return new userData();
+            //return items;
         }
-
-        public static void writeData(userData data)
+        
+        public static void writeData()
         {
             using (StreamWriter file = File.CreateText(dataPath))
             {
@@ -56,6 +51,30 @@ namespace dbdTracker
                 //serialize object directly into file stream
                 serializer.Serialize(file, data);
             }
+        }
+
+        public static int findData(string ID)
+        {
+            if (data == null)
+            {
+                return -1;
+            }
+
+            for (int i = 0; i < data.Count; i++)
+            {
+                if (data[i].steamID == ID)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public static int addData(string ID)
+        {
+            data.Add(new userData());
+            data[data.Count - 1].steamID = ID;
+            return data.Count - 1;
         }
 
         private static void createFolder()

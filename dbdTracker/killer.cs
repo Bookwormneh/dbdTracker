@@ -8,7 +8,7 @@ namespace dbdTracker
 {
     class Killer
     {
-        public userData data;
+        public int dataIndex;
         public string steamID = null;
         public string dbdID = null;
 

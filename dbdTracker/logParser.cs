@@ -146,7 +146,10 @@ namespace dbdTracker
             bool gameStarted = false;
             Game currentGame = null;
 
-            using (StreamReader sr = File.OpenText(@"C:\Users\Noah\source\repos\dbdTracker\dbdTracker\DeadByDaylightOriginOneGame.log"))
+            dataHandler.getData();
+
+            var fs = new FileStream(@"C:\Users\Noah\AppData\Local\DeadByDaylight\Saved\Logs\DeadByDaylight.log", FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using (StreamReader sr = new StreamReader(fs))
             {
                 string s = String.Empty;
                 while ((s = sr.ReadLine()) != null)
@@ -200,11 +203,7 @@ namespace dbdTracker
                 }
             }
 
-            dataHandler.writeData(currentGame.killer.data);
-            for (int i = 0; i < currentGame.survivors.Length; i++)
-            {
-                dataHandler.writeData(currentGame.survivors[i].data);
-            }
+            dataHandler.writeData();
 
             Console.WriteLine("Parse finnished.");
 

@@ -15,13 +15,17 @@ namespace dbdTracker
 
         public int rating;
 
-        public String comments;
+        public string comments;
 
-        public int timesPlayedWith;
-
+        public int stTimesPlayedWith;
+        public int stTimesEscaped;
+        public int stTimesDied;
 
         public int timesPlayedAgainst;
         public int timesKilled;
+        public int timesEscaped;
+
+
 
         public userData()
         {

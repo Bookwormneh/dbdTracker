@@ -28,8 +28,14 @@ namespace dbdTracker
                 {
                     Console.WriteLine("Adding new surivor: " + dbdID + "|" + steamID);
                     survivors[i] = new Survivor(dbdID, steamID, getUserFromId(steamID));
-                    survivors[i].data = dataHandler.getData(survivors[i].steamID);
+                    if ((survivors[i].dataIndex = dataHandler.findData(survivors[i].steamID)) == -1)
+                    {
+                        survivors[i].dataIndex = dataHandler.addData(survivors[i].steamID);
+                        dataHandler.data[survivors[i].dataIndex].timesPlayedAgainst++;
+                    }
+                    
                     return;
+
                 }
             }
 
@@ -42,7 +48,16 @@ namespace dbdTracker
             {
                 Console.WriteLine("Adding new killer: " + dbdID + "|" + steamID);
                 killer = new Killer(dbdID, steamID, getUserFromId(steamID));
-                killer.data = dataHandler.getData(killer.steamID);
+
+                if ((killer.dataIndex = dataHandler.findData(killer.steamID)) == -1)
+                {
+                    killer.dataIndex = dataHandler.addData(killer.steamID);
+                }
+                else
+                {
+                    
+                }
+                
             }
             else
             {
