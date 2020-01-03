@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dbdTracker.data;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,11 +13,13 @@ namespace dbdTracker
     {
         public Killer killer;
         public Survivor[] survivors;
+        public gameData gameData;
 
         public Game()
         {
             killer = null;
             survivors = new Survivor[4];
+            gameData = new gameData();
             
         }
 
