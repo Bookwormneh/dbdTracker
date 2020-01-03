@@ -19,6 +19,9 @@ namespace dbdTracker
 
         public List<string> logAchievements = new List<string>();
 
+        public int survivorsKilled;
+        
+
         public Killer(string dbdID, string steamID, string playerName)
         {
             this.steamID = steamID;
