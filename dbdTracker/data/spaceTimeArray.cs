@@ -18,7 +18,7 @@ namespace dbdTracker.data
 
         public void addEvent(DateTime eventTime)
         {
-            timeLine.Add(new DateTime[]{ eventTime });
+            timeLine.Add(new DateTime[]{ eventTime, eventTime });
         }
 
         public void startEvent(DateTime eventTime)

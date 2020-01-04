@@ -63,6 +63,7 @@ namespace dbdTracker.data
         public spaceTimeArray[] shapeStalk = { new spaceTimeArray(), new spaceTimeArray(), new spaceTimeArray(), new spaceTimeArray() };
 
         public spaceTimeArray hagTrapsPlaced = new spaceTimeArray();
+        public spaceTimeArray hagTeleportToTrap = new spaceTimeArray();
         public spaceTimeArray[] hagTrapsTriggered = { new spaceTimeArray(), new spaceTimeArray(), new spaceTimeArray(), new spaceTimeArray()};
         public spaceTimeArray[] hagTeleportHits = { new spaceTimeArray(), new spaceTimeArray(), new spaceTimeArray(), new spaceTimeArray()};
 

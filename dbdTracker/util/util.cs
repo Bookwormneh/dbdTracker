@@ -34,6 +34,28 @@ namespace dbdTracker.util
             
         }
 
+        public static bool containsTag(string s, string contain)
+        {
+            if (splitTag(s).Contains(contain))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static List<string> splitTag(string s)
+        {
+            List<string> hold = new List<string>();
+            
+            while (s.IndexOf('[') != -1)
+            {
+                hold.Add(substring(s, "[", "]"));
+                s = s.Remove(s.IndexOf(hold[hold.Count - 1]) - 1, hold[hold.Count - 1].Length + 2);
+            }
+
+            return hold;
+        }
+
         private static char[] seperators = { '.', '-', ':'};
         public static DateTime getTime(string s)
         {
