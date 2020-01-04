@@ -195,6 +195,7 @@ namespace dbdTracker
                     if (gameStarted)
                     {
                         // currentGame.setAcheivements(s);
+                        
                         playerAcheivementParser.parse(currentGame.gameData, s);
                         if (s.Contains("GameFlow: Verbose: vvv OnLeavingOnlineMultiplayer vvv"))
                         {

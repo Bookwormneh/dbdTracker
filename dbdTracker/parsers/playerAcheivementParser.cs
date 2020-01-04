@@ -11,6 +11,7 @@ namespace dbdTracker.parsers
     {
         public static void parse(gameData data, string s)
         {
+            
             parseSurvivor(data, s);
             parseKiller(data, s);
         }
@@ -72,7 +73,44 @@ namespace dbdTracker.parsers
 
         public static void parseHag(gameData data, string s)
         {
+            if (s.Contains("[PlacePhantomTrap]") && util.util.containsTag(s, "==> Interaction Enter"))
+            {
+                Console.WriteLine("Started to place trap: " + util.util.getTime(s));
+                data.hagTrapsPlaced.startEvent(util.util.getTime(s));
+                return;
+            }
+            if (s.Contains("[PlacePhantomTrap]") && util.util.containsTag(s, "<== Interaction Exit"))
+            {
+                Console.WriteLine("End to place trap:     " + util.util.getTime(s) + Environment.NewLine);
+                data.hagTrapsPlaced.endEvent(util.util.getTime(s));
+                return;
+            }
 
+            if (s.Contains("[TeleportToPhantomTrap]") && util.util.containsTag(s, "==> Interaction Enter"))
+            {
+                Console.WriteLine("Started to place trap: " + util.util.getTime(s));
+                data.hagTeleportToTrap.startEvent(util.util.getTime(s));
+                return;
+            }
+            if (s.Contains("[TeleportToPhantomTrap]") && util.util.containsTag(s, "<== Interaction Exit"))
+            {
+                Console.WriteLine("End to place trap:     " + util.util.getTime(s) + Environment.NewLine);
+                data.hagTeleportToTrap.endEvent(util.util.getTime(s));
+                return;
+            }
+
+            if (s.Contains("[PlacePhantomTrap]") && util.util.containsTag(s, "==> Interaction Enter"))
+            {
+                Console.WriteLine("Started to place trap: " + util.util.getTime(s));
+                data.hagTrapsPlaced.startEvent(util.util.getTime(s));
+                return;
+            }
+            if (s.Contains("[PlacePhantomTrap]") && util.util.containsTag(s, "<== Interaction Exit"))
+            {
+                Console.WriteLine("End to place trap:     " + util.util.getTime(s) + Environment.NewLine);
+                data.hagTrapsPlaced.endEvent(util.util.getTime(s));
+                return;
+            }
         }
 
         public static void parseDoctor(gameData data, string s)
