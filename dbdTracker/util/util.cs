@@ -34,16 +34,7 @@ namespace dbdTracker.util
             
         }
 
-        public static bool containsTag(string s, string contain)
-        {
-            if (splitTag(s).Contains(contain))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public static List<string> splitTag(string s)
+        private static List<string> splitTag(string s)
         {
             List<string> hold = new List<string>();
             
@@ -54,6 +45,25 @@ namespace dbdTracker.util
             }
 
             return hold;
+        }
+
+        public static bool containsTag(string s, string contain)
+        {
+            if (splitTag(s).Contains(contain))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool containsTag(string s, string contain, string contain2)
+        {
+            List<string> hold = splitTag(s);
+            if (hold.Contains(contain) && hold.Contains(contain2))
+            {
+                return true;
+            }
+            return false;
         }
 
         private static char[] seperators = { '.', '-', ':'};
@@ -68,30 +78,6 @@ namespace dbdTracker.util
             //Console.WriteLine(new DateTime(Int32.Parse(hold[0]), Int32.Parse(hold[1]), Int32.Parse(hold[2]), Int32.Parse(hold[3]), Int32.Parse(hold[4]), Int32.Parse(hold[5]), Int32.Parse(hold[6])).ToString());
 
             return new DateTime(Int32.Parse(hold[0]), Int32.Parse(hold[1]), Int32.Parse(hold[2]), Int32.Parse(hold[3]), Int32.Parse(hold[4]), Int32.Parse(hold[5]), Int32.Parse(hold[6]));
-
-            /*
-            
-            string[] hold = { "", "", "", "", "", "", "" };
-            // DateTime hold = DateTime.MinValue;
-            hold[0] = (substring(s, "[", "."));
-            
-            hold[1] = (substring(s, ".", hold[0] + ".", "."));
-
-            hold[2] = (substring(s, ".", hold[0] + "." + hold[1] + ".", "-"));
-
-            hold[3] = (substring(s, "-", hold[0] + "." + hold[1] + "." + hold[2] + "-", "."));
-
-            hold[4] = (substring(s, ".", hold[0] + "." + hold[1] + "." + hold[2] + "-" + hold[3] + ".", "."));
-
-            hold[5] = (substring(s, ".", hold[0] + "." + hold[1] + "." + hold[2] + "-" + hold[3] + "." + hold[4] + ".", ":"));
-
-            hold[6] = (substring(s, ":", hold[0] + "." + hold[1] + "." + hold[2] + "-" + hold[3] + "." + hold[4] + "." + hold[5] + ":", "]"));
-
-
-            //Console.WriteLine(new DateTime(Int32.Parse(hold[0]), Int32.Parse(hold[1]), Int32.Parse(hold[2]), Int32.Parse(hold[3]), Int32.Parse(hold[4]), Int32.Parse(hold[5]), Int32.Parse(hold[6])).ToString());
-            
-            return new DateTime(Int32.Parse(hold[0]), Int32.Parse(hold[1]), Int32.Parse(hold[2]), Int32.Parse(hold[3]), Int32.Parse(hold[4]), Int32.Parse(hold[5]), Int32.Parse(hold[6]));
-            */
         }
     }
 }

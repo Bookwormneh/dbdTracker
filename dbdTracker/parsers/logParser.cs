@@ -149,9 +149,9 @@ namespace dbdTracker
 
             dataHandler.getData();
 
-         var fs = new FileStream(@"C:\Users\Noah\AppData\Local\DeadByDaylight\Saved\Logs\DeadByDaylight.log", FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+         //var fs = new FileStream(@"C:\Users\Noah\AppData\Local\DeadByDaylight\Saved\Logs\DeadByDaylight.log", FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
         
-        //    var fs = new FileStream(@"C:\Users\Noah\source\repos\dbdTracker\dbdTracker\DeadByDaylightOriginOneGame.log", FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            var fs = new FileStream(@"C:\Users\Noah\source\repos\dbdTracker\dbdTracker\DeadByDaylightOriginOneGame.log", FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using (StreamReader sr = new StreamReader(fs))
             {
                 string s = String.Empty;

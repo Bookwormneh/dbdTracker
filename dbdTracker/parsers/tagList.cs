@@ -8,7 +8,10 @@ namespace dbdTracker.parsers
 {
     class tagList
     {
-        public static string timesHooked = "";
+        public static string interactionEnter = "==> Interaction Enter";
+        public static string interactionExit = "<== Interaction Exit";
+
+        public string timesHooked = "";
         public static string timesHit = "";
         public static string protectionHits = "";
 
@@ -48,8 +51,8 @@ namespace dbdTracker.parsers
         public static string shapeTierThreeHit = "";
         public static string shapeStalk = "";
 
-        public static string hagTrapsPlaced = "";
-        public static string hagTeleportToTrap = "";
+        public static string hagTrapsPlaced = "PlacePhantomTrap";
+        public static string hagTeleportToTrap = "TeleportToPhantomTrap";
         public static string hagTrapsTriggered = "";
         public static string hagTeleportHits = "";
 
