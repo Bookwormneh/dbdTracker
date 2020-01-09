@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using dbdTracker.data;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,11 +25,6 @@ namespace dbdTracker
             if (!File.Exists(dataPath))
             {
                 createFile();
-                
-            }
-
-            if (data == null)
-            {
                 data = new List<userData>();
                 return;
             }
@@ -52,6 +48,57 @@ namespace dbdTracker
                 serializer.Serialize(file, data);
             }
         }
+
+        public static void updateData(Game currentGame)
+        {
+            // Update killer info
+            updateKiller(currentGame);
+
+            // Update surivor info
+            updateSurivors(currentGame);
+            writeData();
+        }
+
+        private static void updateKiller(Game currentGame)
+        {
+            for (int i = 0; i < data.Count; i++)
+            {
+                if (currentGame.killer.steamID.Equals(data[i].steamID))
+                {
+                    data[i].timesPlayedAgainst++;
+
+                    // moar
+
+
+                    return;
+                }
+            }
+            Console.WriteLine("Killer not found... adding: " + currentGame.killer.steamID);
+            addData(currentGame.killer.steamID);
+        }
+
+        private static void updateSurivors(Game currentGame)
+        {
+            foreach (Survivor surv in currentGame.survivors)
+            {
+                for (int i = 0; i < data.Count; i++)
+                {
+                    if (surv.steamID.Equals(data[i].steamID))
+                    {
+                        data[i].timesPlayedAgainst++;
+
+                        // moar
+
+
+                        return;
+                    }
+                }
+                Console.WriteLine("Survivor not found... adding: " + surv.steamID);
+                addData(surv.steamID);
+
+            }
+        }
+
 
         public static int findData(string ID)
         {

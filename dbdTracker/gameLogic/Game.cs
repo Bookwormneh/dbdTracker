@@ -35,11 +35,14 @@ namespace dbdTracker
                 {
                     Console.WriteLine("Adding new surivor: " + dbdID + "|" + steamID);
                     survivors[i] = new Survivor(dbdID, steamID, userName);
+
+                    /*
                     if ((survivors[i].dataIndex = dataHandler.findData(survivors[i].steamID)) == -1)
                     {
                         survivors[i].dataIndex = dataHandler.addData(survivors[i].steamID);
                         dataHandler.data[survivors[i].dataIndex].timesPlayedAgainst++;
                     }
+                    */
                     
                     return;
 
@@ -57,6 +60,7 @@ namespace dbdTracker
                 killer = new Killer(dbdID, steamID, userName);
                 gameData.slasherCharacter = "hag";
 
+                /*
                 if ((killer.dataIndex = dataHandler.findData(killer.steamID)) == -1)
                 {
                     killer.dataIndex = dataHandler.addData(killer.steamID);
@@ -65,6 +69,7 @@ namespace dbdTracker
                 {
                     
                 }
+                */
                 
             }
             else

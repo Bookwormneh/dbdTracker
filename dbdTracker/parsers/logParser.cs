@@ -195,6 +195,7 @@ namespace dbdTracker
                         playerAcheivementParser.parse(currentGame.gameData, s);
                         if (s.Contains("GameFlow: Verbose: vvv OnLeavingOnlineMultiplayer vvv"))
                         {
+                            dataHandler.updateData(currentGame);
                             gameStarted = false;
                         }
                         
@@ -203,7 +204,7 @@ namespace dbdTracker
                 }
             }
 
-            dataHandler.writeData();
+            // dataHandler.writeData();
 
             Console.WriteLine("Parse finnished.");
 
