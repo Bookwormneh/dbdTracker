@@ -149,9 +149,9 @@ namespace dbdTracker
 
             dataHandler.getData();
 
-         //var fs = new FileStream(@"C:\Users\Noah\AppData\Local\DeadByDaylight\Saved\Logs\DeadByDaylight.log", FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            var fs = new FileStream(@"C:\Users\Noah\AppData\Local\DeadByDaylight\Saved\Logs\DeadByDaylight.log", FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
         
-            var fs = new FileStream(@"C:\Users\Noah\source\repos\dbdTracker\dbdTracker\DeadByDaylightOriginOneGame.log", FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            //var fs = new FileStream(@"C:\Users\Noah\source\repos\dbdTracker\dbdTracker\DeadByDaylightOriginOneGame.log", FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using (StreamReader sr = new StreamReader(fs))
             {
                 string s = String.Empty;
@@ -171,16 +171,11 @@ namespace dbdTracker
                         if (s.Contains("Session:GameSession PlayerId"))
                         {
                             // Console.WriteLine("Found player ID");
-                            if (currentGame.killer == null)
-                            {
-                                currentGame.addKiller(util.util.substring(s, "PlayerId:", "|"), s.Substring(s.IndexOf("|") + 1)); ;
+
+                            currentGame.dbdIDs.Add(util.util.substring(s, "PlayerId:", "|"));
+                            currentGame.steamIDs.Add(s.Substring(s.IndexOf("|") + 1));
+                            currentGame.userNames.Add(util.util.getUserFromId(currentGame.steamIDs[currentGame.steamIDs.Count - 1]));
                                 
-                            }
-                            else
-                            {
-                                currentGame.addSurvivor(util.util.substring(s, "PlayerId:", "|"), s.Substring(s.IndexOf("|") + 1));
-                                
-                            }
                         }
 
                         currentGame.setModels(s);
@@ -194,8 +189,9 @@ namespace dbdTracker
 
                     if (gameStarted)
                     {
-                        // currentGame.setAcheivements(s);
                         
+                        // currentGame.setAcheivements(s);
+
                         playerAcheivementParser.parse(currentGame.gameData, s);
                         if (s.Contains("GameFlow: Verbose: vvv OnLeavingOnlineMultiplayer vvv"))
                         {

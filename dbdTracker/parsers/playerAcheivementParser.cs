@@ -76,13 +76,13 @@ namespace dbdTracker.parsers
         {
             if (util.util.containsTag(s, tagList.hagTrapsPlaced, tagList.interactionEnter))
             {
-                Console.WriteLine("Started to place trap: " + util.util.getTime(s));
+                // Console.WriteLine("Started to place trap: " + util.util.getTime(s));
                 data.hagTrapsPlaced.startEvent(util.util.getTime(s));
                 return;
             }
             if (util.util.containsTag(s, tagList.hagTrapsPlaced, tagList.interactionExit))
             {
-                Console.WriteLine("End to place trap:     " + util.util.getTime(s) + Environment.NewLine);
+                // Console.WriteLine("End to place trap:     " + util.util.getTime(s) + Environment.NewLine);
                 data.hagTrapsPlaced.endEvent(util.util.getTime(s));
                 return;
             }

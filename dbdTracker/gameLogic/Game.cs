@@ -11,6 +11,10 @@ namespace dbdTracker
 {
     class Game
     {
+        public List<string> dbdIDs = new List<string>();
+        public List<string> steamIDs = new List<string>();
+        public List<string> userNames = new List<string>();
+
         public Killer killer;
         public Survivor[] survivors;
         public gameData gameData;
@@ -23,14 +27,14 @@ namespace dbdTracker
             
         }
 
-        public void addSurvivor(string dbdID, string steamID)
+        public void addSurvivor(string dbdID, string steamID, string userName)
         {
             for (int i = 0; i < survivors.Length; i++)
             {
                 if (survivors[i] == null)
                 {
                     Console.WriteLine("Adding new surivor: " + dbdID + "|" + steamID);
-                    survivors[i] = new Survivor(dbdID, steamID, getUserFromId(steamID));
+                    survivors[i] = new Survivor(dbdID, steamID, userName);
                     if ((survivors[i].dataIndex = dataHandler.findData(survivors[i].steamID)) == -1)
                     {
                         survivors[i].dataIndex = dataHandler.addData(survivors[i].steamID);
@@ -45,12 +49,12 @@ namespace dbdTracker
             Console.WriteLine("Something went wrong - tried to add a survivor but there was no room?");
         }
 
-        public void addKiller(string dbdID, string steamID)
+        public void addKiller(string dbdID, string steamID, string userName)
         {
             if (killer == null)
             {
                 Console.WriteLine("Adding new killer: " + dbdID + "|" + steamID);
-                killer = new Killer(dbdID, steamID, getUserFromId(steamID));
+                killer = new Killer(dbdID, steamID, userName);
                 gameData.slasherCharacter = "hag";
 
                 if ((killer.dataIndex = dataHandler.findData(killer.steamID)) == -1)
@@ -81,10 +85,15 @@ namespace dbdTracker
                 {
                     // Console.WriteLine(s);
                     string name = util.util.substring(s, " - ", "Verbose:", "][");
-                    name = name.ToLower();
+                    // name = name.ToLower();
                     
-                    if (name.Contains(killer.playerName) && !killer.modelsAdded)
+                    if (killer == null && s.Contains("Slasher"))
                     {
+                        //string killerName = util.util.substring(s, " - ", "]");
+                        Console.WriteLine(">" + name + "<");
+                        addKiller(dbdIDs[userNames.IndexOf(name)], steamIDs[userNames.IndexOf(name)], name);
+                        userNames[userNames.IndexOf(name)] = null;
+
                         killer.modelName = util.util.substring(s, "Verbose: [", " -");
                         // killer.playerName = s.Substring(s.IndexOf("-", s.IndexOf("Verbose:")) + 2, s.IndexOf("]", s.IndexOf("Verbose:")) - s.IndexOf("-", s.IndexOf("Verbose:")) - 2);
 
@@ -97,8 +106,15 @@ namespace dbdTracker
                     }
                     for (int i = 0; i < survivors.Length; i++)
                     {
-                        if (name.Contains(survivors[i].playerName) && !survivors[i].modelsAdded)
+                        // Console.WriteLine("Hit: " + name);
+                        if (survivors[i] == null && userNames.IndexOf(name) != -1)
                         {
+                            //string survivorName = util.util.substring(s, " - ", "]");
+                            Console.WriteLine(">" + name + "<");
+
+                            addSurvivor(dbdIDs[userNames.IndexOf(name)], steamIDs[userNames.IndexOf(name)], name);
+                            userNames[userNames.IndexOf(name)] = null;
+
                             survivors[i].modelName = util.util.substring(s, "Verbose: [", " -");
                             // survivors[i].playerName = s.Substring(s.IndexOf("-", s.IndexOf("Verbose:")) + 2, s.IndexOf("]", s.IndexOf("Verbose:")) - s.IndexOf("-", s.IndexOf("Verbose:")) - 2);
 
@@ -143,30 +159,7 @@ namespace dbdTracker
             }
         }
 
-        public static string getUserFromId(string id)
-        {
-            string hold;
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://steamcommunity.com/profiles/" + id);
-            request.AutomaticDecompression = DecompressionMethods.GZip;
-
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-            using (Stream stream = response.GetResponseStream())
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                //hold = response.ResponseUri.ToString();
-                hold = reader.ReadToEnd();
-            }
-            // hold = hold.Substring(hold.IndexOf("id") + "id".Length + 1, hold.IndexOf("/", hold.IndexOf("id") + "id".Length + 1) - hold.IndexOf("id") - "id".Length - 1);
-            // Console.WriteLine(">" + hold + "<");
-            hold = util.util.substring(hold, "<title>Steam Community :: ", "</title>");
-
-            Console.WriteLine(">" + hold + "<");
-
-
-
-            return hold;
-        }
+        
 
         
 

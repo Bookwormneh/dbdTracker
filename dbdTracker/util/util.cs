@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace dbdTracker.util
 {
@@ -13,7 +18,7 @@ namespace dbdTracker.util
         public static string substring(string s, string startString, string endString)
         {
             // Console.WriteLine(s + Environment.NewLine + ">" + startString + "< to >" + endString + "<");
-            return s.Substring(s.IndexOf(startString) + startString.Length, s.IndexOf(endString) - s.IndexOf(startString) - startString.Length);
+            return s.Substring(s.IndexOf(startString) + startString.Length, s.IndexOf(endString, s.IndexOf(startString) + startString.Length) - s.IndexOf(startString) - startString.Length);
         }
 
         public static string substring(string s, string startString, string startFrom, string endString)
@@ -38,7 +43,7 @@ namespace dbdTracker.util
         {
             List<string> hold = new List<string>();
             
-            while (s.IndexOf('[') != -1)
+            while (s.IndexOf('[') != -1 && s.IndexOf(']') != -1)
             {
                 hold.Add(substring(s, "[", "]"));
                 s = s.Remove(s.IndexOf(hold[hold.Count - 1]) - 1, hold[hold.Count - 1].Length + 2);
@@ -78,6 +83,32 @@ namespace dbdTracker.util
             //Console.WriteLine(new DateTime(Int32.Parse(hold[0]), Int32.Parse(hold[1]), Int32.Parse(hold[2]), Int32.Parse(hold[3]), Int32.Parse(hold[4]), Int32.Parse(hold[5]), Int32.Parse(hold[6])).ToString());
 
             return new DateTime(Int32.Parse(hold[0]), Int32.Parse(hold[1]), Int32.Parse(hold[2]), Int32.Parse(hold[3]), Int32.Parse(hold[4]), Int32.Parse(hold[5]), Int32.Parse(hold[6]));
+        }
+
+        public static string getUserFromId(string id)
+        {
+            string hold;
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://steamcommunity.com/profiles/" + id);
+            request.AutomaticDecompression = DecompressionMethods.GZip;
+
+            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            using (Stream stream = response.GetResponseStream())
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                // hold = response.ResponseUri.ToString();
+                hold = reader.ReadToEnd();
+            }
+            // Console.WriteLine(hold);
+            // hold = hold.Substring(hold.IndexOf("id") + "id".Length + 1, hold.IndexOf("/", hold.IndexOf("id") + "id".Length + 1) - hold.IndexOf("id") - "id".Length - 1);
+            // Console.WriteLine(">" + hold + "<");
+            hold = substring(hold, "<title>Steam Community :: ", "</title>");
+
+            Console.WriteLine(">" + hold + "<");
+
+
+
+            return hold;
         }
     }
 }
